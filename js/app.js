@@ -1,3 +1,5 @@
+
+
 //Hero Class
     //constructor
         //properties
@@ -56,23 +58,10 @@ class Hero {
     }
 }
 
-const player = new Hero();
-
-// Init allEnemies array
-// For each enemy created, push new Enemy object into array.
-
-
-
 // Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // x position
-    // y position
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+let Enemy = function() {
+    this.x = 0;
+    this.y = 0;
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -118,3 +107,9 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+const player = new Hero();
+const bug1 = new Enemy();
+const allEnemies = [];
+allEnemies.push(bug1);
