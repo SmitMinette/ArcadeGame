@@ -28,7 +28,7 @@ class Hero {
         this.startY = (this.jump * 4) + 55;
         this.x = this.startX;
         this.y = this.startY;
-
+        this.victory = false;
     }
     // Draw Hero sprite in position
     render(){
@@ -60,17 +60,25 @@ class Hero {
     update(){
         //check collisions
         for (let enemy of allEnemies){
-            if (this.y  === enemy.y && this.x === (enemy.x + enemy.step > this.x && enemy.x < this.x+ this.step)){
-                alert("collide");
+            if (this.y  === enemy.y && (enemy.x + enemy.step/2 > this.x && enemy.x < this.x + this.step/2)){
+                this.reset();
+            }
+            if (this.y === 55){
+                // alert("win!");
             }
         }
+    }
+
+    reset(){
+        this.x = this.startX;
+        this.y = this.startY;
     }
 }
 
 // Enemies our player must avoid
 let Enemy = function(x, y, speed) {
     this.x = x;
-    this.y = y + 50;
+    this.y = y + 55;
     this.sprite = 'images/enemy-bug.png';
     this.step = 101;
     this.speed = speed;
