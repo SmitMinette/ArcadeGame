@@ -28,7 +28,6 @@ class Hero {
         this.startY = (this.jump * 4) + 55;
         this.x = this.startX;
         this.y = this.startY;
-        this.victory = false;
     }
     // Draw Hero sprite in position
     render(){
@@ -76,28 +75,29 @@ class Hero {
 }
 
 // Enemies our player must avoid
-let Enemy = function(x, y, speed) {
-    this.x = x;
-    this.y = y + 55;
-    this.sprite = 'images/enemy-bug.png';
-    this.step = 101;
-    this.speed = speed;
-};
 
-// Update the enemy's position
-Enemy.prototype.update = function(dt) {
-    if (this.x < this.step * 5){
-        this.x += this.speed * dt;
+class Enemy {
+    constructor(x, y, speed) {
+        this.x = x;
+        this.y = y + 55;
+        this.sprite = 'images/enemy-bug.png';
+        this.step = 101;
+        this.speed = speed;
     }
-    else {
-        this.x = -this.step;
+    // Update the enemy's position
+    update(dt) {
+        if (this.x < this.step * 5){
+            this.x += this.speed * dt;
+        }
+        else {
+            this.x = -this.step;
+        }
     }
-};
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+    // Draw the enemy on the screen, required method for game
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y); 
+    }
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
