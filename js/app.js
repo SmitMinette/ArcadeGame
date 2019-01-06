@@ -25,7 +25,7 @@ class Hero {
         this.jump = 83;
         this.sprite = "images/char-boy.png";
         this.startX = this.step * 2;
-        this.startY = (this.jump * 5) - 20;
+        this.startY = (this.jump * 4) + 55;
         this.x = this.startX;
         this.y = this.startY;
 
@@ -56,24 +56,33 @@ class Hero {
                 break;
         }
     }
+
+    update(){
+        //check collisions
+        for (let enemy of allEnemies){
+            if (this.y  === enemy.y && this.x === (enemy.x + enemy.step > this.x && enemy.x < this.x+ this.step)){
+                alert("collide");
+            }
+        }
+    }
 }
 
 // Enemies our player must avoid
-let Enemy = function() {
-    this.x = 0;
-    this.y = 0;
+let Enemy = function(x, y, speed) {
+    this.x = x;
+    this.y = y + 50;
     this.sprite = 'images/enemy-bug.png';
     this.step = 101;
+    this.speed = speed;
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+// Update the enemy's position
 Enemy.prototype.update = function(dt) {
-    if (this.x < this.step * 4){
-        this.x += 70 * dt;
+    if (this.x < this.step * 5){
+        this.x += this.speed * dt;
     }
     else {
-        // reset position
+        this.x = -this.step;
     }
 };
 
@@ -108,6 +117,8 @@ document.addEventListener('keyup', function(e) {
 
 
 const player = new Hero();
-const bug1 = new Enemy();
+const bug1 = new Enemy(-101, 0, 100);
+const bug2 = new Enemy(-202, 83, 150);
+const bug3 = new Enemy(-101, 83, 170);
 const allEnemies = [];
-allEnemies.push(bug1);
+allEnemies.push(bug1, bug2, bug3);
